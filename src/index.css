@@ -12,8 +12,8 @@
   --bg: #070d09;
   --bg2: #0d1610;
   --bg3: #111a13;
-  --text: #c8e8d0;
-  --text-dim: #4a7a5a;
+  --text: #e0f5e8;
+  --text-dim: #8ab89a;
   --border: #1a3020;
   --pixel: 'Press Start 2P', monospace;
   --mono: 'Share Tech Mono', monospace;
@@ -30,6 +30,7 @@ body {
   font-size: 14px;
   line-height: 1.6;
   overflow-x: hidden;
+  animation: body-glitch 9s step-end infinite;
 }
 
 /* Grid background */
@@ -45,7 +46,7 @@ body::before {
   z-index: 0;
 }
 
-/* Scanline flicker */
+/* Scanline — animiert von oben nach unten */
 body::after {
   content: '';
   position: fixed;
@@ -57,6 +58,20 @@ body::after {
     rgba(0,0,0,0.05) 2px,
     rgba(0,0,0,0.05) 4px
   );
+  pointer-events: none;
+  z-index: 0;
+  animation: scanlines-scroll 5s linear infinite;
+}
+
+/* Floating particles */
+#root::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(0,255,136,0.45) 1px, transparent 1px);
+  background-size: 110px 110px;
+  background-position: 25px 55px;
+  animation: float-up 22s linear infinite;
   pointer-events: none;
   z-index: 0;
 }
@@ -139,4 +154,25 @@ a:hover {
 
 .animate-in {
   animation: fadeIn 0.6s ease forwards;
+}
+
+/* Scanline scrollt 4px nach unten (= ein Repeat-Zyklus) */
+@keyframes scanlines-scroll {
+  from { background-position: 0 0; }
+  to   { background-position: 0 4px; }
+}
+
+/* Particles steigen auf — translateY -110px = genau ein Tile, loop nahtlos */
+@keyframes float-up {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-110px); }
+}
+
+/* Subtiler Glitch-Flicker alle ~9s */
+@keyframes body-glitch {
+  0%, 91%, 100% { filter: none; }
+  92%            { filter: brightness(1.08) contrast(1.04); }
+  93%            { filter: brightness(0.93) hue-rotate(4deg) saturate(1.1); }
+  94%            { filter: brightness(1.03); }
+  95%            { filter: none; }
 }

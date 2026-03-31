@@ -165,7 +165,7 @@ export default function Hero() {
           <img
             src="/avatar.png"
             alt="Max Viet Uhlmann pixel avatar"
-            style={{ width: 220, height: 220, display: 'block', objectFit: 'cover', marginTop: 20 }}
+            style={{ width: 220, height: 220, display: 'block', objectFit: 'cover', marginTop: 20, background: '#0d1610' }}
           />
           <div style={{
             padding: '8px 12px',
