@@ -47,17 +47,19 @@ export default function Skills() {
   return (
     <section id="skills">
       <div className="container">
-        <h2 className="section-title">SKILL_SET</h2>
+        <h2 className="section-title" data-reveal>SKILL_SET</h2>
 
         <div className="skills-grid">
-          {skillGroups.map(group => (
+          {skillGroups.map((group, index) => (
             <div
               key={group.label}
               className="panel skill-card"
+              data-reveal
               style={{
                 '--accent': group.accent,
                 '--accent-soft': group.accentSoft,
                 '--accent-bg': group.accentBg,
+                '--reveal-delay': `${70 + index * 60}ms`,
               }}
             >
               <div className="skill-card-head">

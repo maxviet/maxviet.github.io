@@ -25,24 +25,55 @@ export default function Nav() {
       .map(link => document.getElementById(link.id))
       .filter(Boolean)
 
-    const observer = new IntersectionObserver(
-      entries => {
-        const visible = entries
-          .filter(entry => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)
+    let frame = 0
 
-        if (visible[0]) {
-          setActiveId(visible[0].target.id)
+    const updateActive = () => {
+      const marker = window.innerHeight * (window.innerWidth < 820 ? 0.34 : 0.4)
+      let nextId = ''
+      let smallestDistance = Number.POSITIVE_INFINITY
+
+      sections.forEach(section => {
+        const rect = section.getBoundingClientRect()
+        const center = rect.top + rect.height / 2
+
+        if (rect.top <= marker && rect.bottom >= marker) {
+          nextId = section.id
+          smallestDistance = -1
+          return
         }
-      },
-      {
-        rootMargin: '-24% 0px -52% 0px',
-        threshold: [0.15, 0.3, 0.55],
-      },
-    )
 
-    sections.forEach(section => observer.observe(section))
-    return () => observer.disconnect()
+        if (smallestDistance !== -1) {
+          const distance = Math.abs(center - marker)
+
+          if (distance < smallestDistance) {
+            smallestDistance = distance
+            nextId = section.id
+          }
+        }
+      })
+
+      setActiveId(current => (current === nextId ? current : nextId))
+      frame = 0
+    }
+
+    const requestUpdate = () => {
+      if (!frame) {
+        frame = requestAnimationFrame(updateActive)
+      }
+    }
+
+    requestUpdate()
+    window.addEventListener('scroll', requestUpdate, { passive: true })
+    window.addEventListener('resize', requestUpdate)
+
+    return () => {
+      if (frame) {
+        cancelAnimationFrame(frame)
+      }
+
+      window.removeEventListener('scroll', requestUpdate)
+      window.removeEventListener('resize', requestUpdate)
+    }
   }, [])
 
   useEffect(() => {

@@ -22,6 +22,7 @@
   --border-strong: #2b4b37;
   --shadow-soft: 0 18px 50px rgba(0, 0, 0, 0.28);
   --shadow-green: 0 0 32px rgba(0, 255, 136, 0.12);
+  --ease-premium: cubic-bezier(0.22, 1, 0.36, 1);
   --pixel: 'Press Start 2P', monospace;
   --mono: 'Share Tech Mono', monospace;
 }
@@ -59,6 +60,7 @@ body::before {
   opacity: 0.9;
   pointer-events: none;
   z-index: 0;
+  animation: grid-drift 42s linear infinite;
 }
 
 body::after {
@@ -76,7 +78,7 @@ body::after {
   mix-blend-mode: screen;
   pointer-events: none;
   z-index: 0;
-  animation: scanlines-scroll 16s linear infinite;
+  animation: scanlines-scroll 20s linear infinite;
 }
 
 #root {
@@ -111,6 +113,7 @@ body::after {
     radial-gradient(circle at 18% 78%, rgba(74, 255, 234, 0.08), transparent 20%);
   pointer-events: none;
   z-index: 0;
+  animation: ambient-breathe 18s ease-in-out infinite;
 }
 
 main {
@@ -161,6 +164,10 @@ a:hover {
   border: 1px solid var(--border);
   background: linear-gradient(180deg, rgba(17, 26, 20, 0.92), rgba(9, 14, 11, 0.86));
   box-shadow: var(--shadow-soft);
+  transition:
+    border-color 0.35s var(--ease-premium),
+    box-shadow 0.35s var(--ease-premium),
+    transform 0.35s var(--ease-premium);
 }
 
 .panel::before {
@@ -193,6 +200,23 @@ a:hover {
 .text-stack {
   display: grid;
   gap: 16px;
+}
+
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(18px);
+  filter: saturate(0.92);
+  transition:
+    opacity 0.78s var(--ease-premium),
+    transform 0.78s var(--ease-premium),
+    filter 0.78s ease;
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  filter: none;
 }
 
 .button {
@@ -481,7 +505,7 @@ a:hover {
 .hero-copy {
   position: relative;
   z-index: 2;
-  animation: fadeIn 0.8s ease forwards;
+  animation: fadeIn 1.08s var(--ease-premium) forwards;
 }
 
 .hero-badges {
@@ -611,7 +635,7 @@ a:hover {
   position: relative;
   justify-self: end;
   width: min(100%, 446px);
-  animation: fadeIn 1s ease 0.15s both;
+  animation: fadeIn 1.36s var(--ease-premium) 0.18s both;
 }
 
 .hero-visual::before {
@@ -703,6 +727,16 @@ a:hover {
   align-items: start;
 }
 
+.about-copy:hover,
+.stats-panel:hover,
+.contact-copy-panel:hover,
+.contact-list-panel:hover,
+.skill-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-soft), var(--shadow-green);
+}
+
 .about-copy,
 .stats-panel,
 .contact-copy-panel,
@@ -723,6 +757,14 @@ a:hover {
   gap: 16px;
   padding: 12px 0;
   border-bottom: 1px solid var(--border);
+}
+
+.contact-row {
+  transition: background 0.25s ease, border-color 0.25s ease;
+}
+
+.contact-row:hover {
+  background: rgba(0, 255, 136, 0.04);
 }
 
 .stat-key,
@@ -755,6 +797,15 @@ a:hover {
 .timeline-item {
   position: relative;
   margin-bottom: 22px;
+  transition: opacity 0.35s var(--ease-premium);
+}
+
+.timeline-item[data-reveal].is-visible {
+  opacity: 0.84;
+}
+
+.timeline-item.is-active[data-reveal].is-visible {
+  opacity: 1;
 }
 
 .timeline-dot {
@@ -777,7 +828,26 @@ a:hover {
 .timeline-card {
   padding: 22px 24px;
   border-left: 2px solid var(--accent);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    transform 0.35s var(--ease-premium),
+    box-shadow 0.35s var(--ease-premium),
+    border-color 0.35s var(--ease-premium);
+}
+
+.timeline-item.is-active .timeline-dot {
+  background: var(--accent);
+  box-shadow:
+    0 0 0 4px var(--accent-bg),
+    0 0 18px var(--accent-soft);
+}
+
+.timeline-item.is-active .timeline-card {
+  transform: translateX(6px);
+  box-shadow: var(--shadow-soft), 0 0 30px var(--accent-bg);
+}
+
+.timeline-item.is-active .timeline-title {
+  text-shadow: 0 0 16px var(--accent-bg);
 }
 
 .timeline-item:hover .timeline-card {
@@ -848,7 +918,10 @@ a:hover {
 .project-card {
   padding: 24px;
   border-top: 1px solid var(--accent);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  transition:
+    transform 0.35s var(--ease-premium),
+    box-shadow 0.35s var(--ease-premium),
+    border-color 0.35s var(--ease-premium);
 }
 
 .project-card:hover {
@@ -1064,6 +1137,33 @@ a:hover {
   }
 }
 
+@keyframes grid-drift {
+  0% {
+    background-position: 0 0, 0 0;
+  }
+
+  50% {
+    background-position: 14px 10px, -10px 18px;
+  }
+
+  100% {
+    background-position: 28px 20px, -20px 36px;
+  }
+}
+
+@keyframes ambient-breathe {
+  0%,
+  100% {
+    opacity: 0.72;
+    transform: scale(1) translate3d(0, 0, 0);
+  }
+
+  50% {
+    opacity: 0.92;
+    transform: scale(1.04) translate3d(-1.2%, 1%, 0);
+  }
+}
+
 @keyframes float-up {
   from {
     transform: translateY(0);
@@ -1218,6 +1318,10 @@ a:hover {
 
   .button {
     width: 100%;
+  }
+
+  [data-reveal] {
+    transform: translateY(12px);
   }
 
   .timeline {

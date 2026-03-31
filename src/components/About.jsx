@@ -11,27 +11,27 @@ export default function About() {
   return (
     <section id="about">
       <div className="container">
-        <h2 className="section-title">ABOUT</h2>
+        <h2 className="section-title" data-reveal>ABOUT</h2>
 
         <div className="about-grid">
-          <div className="panel about-copy">
+          <div className="panel about-copy" data-reveal style={{ '--reveal-delay': '60ms' }}>
             <div className="panel-label">profile</div>
 
             <div className="text-stack">
               <p className="body-copy">
-              Ich bin Max Viet Uhlmann, Student der Digitalen Forensik im 6. Semester an der Hochschule Niederrhein. Besonders interessiere ich mich für digitale Forensik, Cyber Security und den praktischen Einsatz lokaler KI-Systeme.
+                Ich bin Max Viet Uhlmann, Student der Digitalen Forensik im 6. Semester an der Hochschule Niederrhein. Besonders interessiere ich mich für digitale Forensik, Cyber Security und den praktischen Einsatz lokaler KI-Systeme.
               </p> 
               <p className="body-copy">
-              Als Teaching Assistant bei CloudCommand GmbH unterstützte ich Teilnehmende beim Einstieg in zentrale IT- und Security-Themen, darunter Linux, Virtualisierung, Active Directory und Netzwerkgrundlagen. Neben technischen Inhalten vermittelte ich auch theoretische Grundlagen im Bereich Cyber Security.
+                Als Teaching Assistant bei CloudCommand GmbH unterstützte ich Teilnehmende beim Einstieg in zentrale IT- und Security-Themen, darunter Linux, Virtualisierung, Active Directory und Netzwerkgrundlagen. Neben technischen Inhalten vermittelte ich auch theoretische Grundlagen im Bereich Cyber Security.
               </p>
 
               <p className="body-copy">
-              Derzeit absolviere ich mein Praktikum bei einer Polizeibehörde. Dort arbeite ich am Aufbau einer lokalen KI-Infrastruktur mit RAG-System für interne Dokumente — ohne Cloud, ohne externe APIs, vollständig lokal.
+                Derzeit absolviere ich mein Praktikum bei einer Polizeibehörde. Dort arbeite ich am Aufbau einer lokalen KI-Infrastruktur mit RAG-System für interne Dokumente — ohne Cloud, ohne externe APIs, vollständig lokal.
               </p>
             </div>
           </div>
 
-          <aside className="panel stats-panel">
+          <aside className="panel stats-panel" data-reveal style={{ '--reveal-delay': '140ms' }}>
             <div className="panel-label">stats</div>
 
             <div className="stats-list">
@@ -43,7 +43,7 @@ export default function About() {
               ))}
             </div>
           </aside>
-          </div>
+        </div>
       </div>
     </section>
   )

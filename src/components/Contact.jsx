@@ -11,10 +11,10 @@ export default function Contact() {
   return (
     <section id="kontakt" className="contact-section">
       <div className="container">
-        <h2 className="section-title">KONTAKT</h2>
+        <h2 className="section-title" data-reveal>KONTAKT</h2>
 
         <div className="contact-grid">
-          <div className="panel contact-copy-panel">
+          <div className="panel contact-copy-panel" data-reveal style={{ '--reveal-delay': '60ms' }}>
             <div className="panel-label">open_channel</div>
 
             <p className="body-copy contact-copy">
@@ -38,7 +38,7 @@ export default function Contact() {
             </div>
           </div>
 
-          <div className="panel contact-list-panel">
+          <div className="panel contact-list-panel" data-reveal style={{ '--reveal-delay': '140ms' }}>
             <div className="panel-label">contact_points</div>
 
             <div className="contact-list">
@@ -46,11 +46,11 @@ export default function Contact() {
                 <div key={c.label} className={`contact-row ${i === contacts.length - 1 ? 'is-last' : ''}`}>
                   <span className="contact-label">{c.label}</span>
 
-                {c.href ? (
+                  {c.href ? (
                     <a href={c.href} className="contact-link">{c.value}</a>
-                ) : (
+                  ) : (
                     <span className="contact-value">{c.value}</span>
-                )}
+                  )}
                 </div>
               ))}
             </div>

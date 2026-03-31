@@ -39,17 +39,19 @@ export default function Projects() {
   return (
     <section id="projekte">
       <div className="container">
-        <h2 className="section-title">PROJEKTE</h2>
+        <h2 className="section-title" data-reveal>PROJEKTE</h2>
 
         <div className="projects-grid">
-          {projects.map(p => (
+          {projects.map((p, index) => (
             <article
               key={p.id}
               className="panel project-card"
+              data-reveal
               style={{
                 '--accent': p.accent,
                 '--accent-soft': p.accentSoft,
                 '--accent-bg': p.accentBg,
+                '--reveal-delay': `${70 + index * 80}ms`,
               }}
             >
               {p.featured && (

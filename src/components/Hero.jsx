@@ -32,13 +32,13 @@ export default function Hero() {
 
     if (!deleting) {
       if (charIdx < current.length) {
-        timeout = setTimeout(() => setCharIdx(i => i + 1), 55)
+        timeout = setTimeout(() => setCharIdx(i => i + 1), 64)
       } else {
-        timeout = setTimeout(() => setDeleting(true), 1800)
+        timeout = setTimeout(() => setDeleting(true), 2250)
       }
     } else {
       if (charIdx > 0) {
-        timeout = setTimeout(() => setCharIdx(i => i - 1), 28)
+        timeout = setTimeout(() => setCharIdx(i => i - 1), 32)
       } else {
         setDeleting(false)
         setLineIdx(i => (i + 1) % lines.length)
