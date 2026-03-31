@@ -1,0 +1,142 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --green: #00ff88;
+  --green-dim: #00c96a;
+  --green-dark: #003d1f;
+  --green-faint: #00ff8811;
+  --bg: #070d09;
+  --bg2: #0d1610;
+  --bg3: #111a13;
+  --text: #c8e8d0;
+  --text-dim: #4a7a5a;
+  --border: #1a3020;
+  --pixel: 'Press Start 2P', monospace;
+  --mono: 'Share Tech Mono', monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--mono);
+  font-size: 14px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Grid background */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--green-faint) 1px, transparent 1px),
+    linear-gradient(90deg, var(--green-faint) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Scanline flicker */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0,0,0,0.05) 2px,
+    rgba(0,0,0,0.05) 4px
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+#root {
+  position: relative;
+  z-index: 1;
+}
+
+section {
+  padding: 80px 0;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+.section-title {
+  font-family: var(--pixel);
+  font-size: 11px;
+  color: var(--green);
+  margin-bottom: 40px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.section-title::before {
+  content: '>';
+  color: var(--green-dim);
+}
+
+.section-title::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+a {
+  color: var(--green);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--green-dark);
+  border-radius: 2px;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes glitch {
+  0% { clip-path: inset(40% 0 61% 0); transform: translate(-2px, 0); }
+  20% { clip-path: inset(92% 0 1% 0); transform: translate(2px, 0); }
+  40% { clip-path: inset(43% 0 1% 0); transform: translate(-1px, 0); }
+  60% { clip-path: inset(25% 0 58% 0); transform: translate(1px, 0); }
+  80% { clip-path: inset(54% 0 7% 0); transform: translate(-1px, 0); }
+  100% { clip-path: inset(58% 0 43% 0); transform: translate(2px, 0); }
+}
+
+.animate-in {
+  animation: fadeIn 0.6s ease forwards;
+}
