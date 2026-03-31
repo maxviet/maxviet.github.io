@@ -1,9 +1,9 @@
 export default function About() {
   const stats = [
-    ['Semester', '5 / B.Sc.'],
+    ['Semester', '6 / B.Sc.'],
     ['Aktueller Ø', '2,29'],
-    ['Bestes Modul', 'Ethik + Programmierung (1,0)'],
-    ['Forensikprojekt', '2,0'],
+    ['Fokus', 'Digitale Forensik + Cybersecurity'],
+    ['Praxis', 'Polizeibehörde / lokale RAG-KI-Infrastruktur'],
     ['THM Zertifikate', '2 (Pre-Sec + Intro CyberSec)'],
     ['Geburtsjahr', '2000'],
   ]
@@ -19,18 +19,14 @@ export default function About() {
 
             <div className="text-stack">
               <p className="body-copy">
-              Ich bin Max Viet Uhlmann — Student der Digitalen Forensik im 5. Semester an der Hochschule Niederrhein. 
-              Mein Fokus liegt auf technischer Analyse, Hardware-Security und Incident Response.
+              Ich bin Max Viet Uhlmann, Student der Digitalen Forensik im 6. Semester an der Hochschule Niederrhein. Besonders interessiere ich mich für digitale Forensik, Cyber Security und den praktischen Einsatz lokaler KI-Systeme.
+              </p> 
+              <p className="body-copy">
+              Als Teaching Assistant bei CloudCommand GmbH unterstützte ich Teilnehmende beim Einstieg in zentrale IT- und Security-Themen, darunter Linux, Virtualisierung, Active Directory und Netzwerkgrundlagen. Neben technischen Inhalten vermittelte ich auch theoretische Grundlagen im Bereich Cyber Security.
               </p>
 
               <p className="body-copy">
-              Zuletzt als Teaching Assistant bei CloudCommand GmbH tätig: Aufbau einer Cyber Range, 
-              Betreuung von 30+ Teilnehmenden in Cybersecurity-Kursen, CTF-Design und DevSecOps-Vermittlung.
-              </p>
-
-              <p className="body-copy">
-              Aktuell im Praktikum bei einer Polizeibehörde — dort entwickle ich eine lokale KI-Infrastruktur 
-              mit RAG-System für interne Dokumente. Kein Cloud. Keine externen APIs. Alles lokal.
+              Derzeit absolviere ich mein Praktikum bei einer Polizeibehörde. Dort arbeite ich am Aufbau einer lokalen KI-Infrastruktur mit RAG-System für interne Dokumente — ohne Cloud, ohne externe APIs, vollständig lokal.
               </p>
             </div>
           </div>

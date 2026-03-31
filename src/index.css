@@ -610,7 +610,7 @@ a:hover {
 .hero-visual {
   position: relative;
   justify-self: end;
-  width: min(100%, 420px);
+  width: min(100%, 446px);
   animation: fadeIn 1s ease 0.15s both;
 }
 
@@ -621,12 +621,26 @@ a:hover {
   background: radial-gradient(circle, rgba(0, 255, 136, 0.22), transparent 62%);
   filter: blur(34px);
   opacity: 0.8;
+  pointer-events: none;
+}
+
+.hero-visual-card {
+  position: relative;
+  display: grid;
+  gap: 10px;
+}
+
+.hero-visual-head,
+.hero-visual-meta {
+  display: none;
 }
 
 .hero-avatar-shell {
   position: relative;
   overflow: hidden;
-  padding: 22px;
+  display: grid;
+  place-items: center;
+  padding: 6px;
   border: 1px solid var(--border-strong);
   background: linear-gradient(180deg, rgba(12, 22, 16, 0.92), rgba(8, 13, 10, 0.88));
   box-shadow:
@@ -659,7 +673,7 @@ a:hover {
 
 .hero-avatar-grid {
   position: absolute;
-  inset: 14px;
+  inset: 4px;
   border: 1px solid rgba(26, 48, 32, 0.8);
   background-image:
     linear-gradient(rgba(0, 255, 136, 0.04) 1px, transparent 1px),
@@ -673,39 +687,12 @@ a:hover {
 .hero-avatar {
   position: relative;
   z-index: 1;
-  width: min(100%, 300px);
+  width: 100%;
+  max-width: 100%;
   margin: 0 auto;
   filter:
     drop-shadow(0 18px 26px rgba(0, 0, 0, 0.42))
     drop-shadow(0 0 28px rgba(0, 255, 136, 0.12));
-}
-
-.hero-visual-tags {
-  position: absolute;
-  right: -18px;
-  bottom: 18px;
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.floating-tag {
-  display: inline-flex;
-  align-items: center;
-  min-height: 30px;
-  padding: 0 12px;
-  border: 1px solid var(--border-strong);
-  background: rgba(8, 13, 10, 0.88);
-  box-shadow: var(--shadow-soft);
-  font-family: var(--pixel);
-  font-size: 7px;
-  letter-spacing: 0.12em;
-  color: var(--text-dim);
-}
-
-.floating-tag:nth-child(2) {
-  margin-right: 20px;
 }
 
 .about-grid,
@@ -1116,6 +1103,98 @@ a:hover {
   }
 }
 
+@media (min-width: 1041px) {
+  .hero-visual {
+    width: min(100%, 518px);
+  }
+
+  .hero-visual-card {
+    gap: 12px;
+    padding: 14px;
+    border: 1px solid var(--border-strong);
+    background: linear-gradient(180deg, rgba(10, 18, 14, 0.94), rgba(7, 12, 10, 0.88));
+    box-shadow:
+      0 30px 84px rgba(0, 0, 0, 0.32),
+      0 0 42px rgba(0, 255, 136, 0.08);
+  }
+
+  .hero-visual-card::before {
+    content: '';
+    position: absolute;
+    inset: 10px;
+    border: 1px solid rgba(43, 75, 55, 0.7);
+    pointer-events: none;
+  }
+
+  .hero-visual-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(0, 255, 136, 0.08), transparent 32%, transparent 78%, rgba(74, 255, 234, 0.05));
+    pointer-events: none;
+  }
+
+  .hero-visual-head {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 0 2px;
+  }
+
+  .hero-visual-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+  }
+
+  .hero-avatar-shell {
+    padding: 0;
+    box-shadow:
+      0 18px 52px rgba(0, 0, 0, 0.28),
+      0 0 32px rgba(0, 255, 136, 0.06);
+  }
+
+  .hero-visual-meta {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .hero-meta-item {
+    display: grid;
+    gap: 5px;
+    min-width: 0;
+    padding: 10px 11px;
+    border: 1px solid rgba(43, 75, 55, 0.72);
+    background: rgba(6, 11, 8, 0.72);
+  }
+
+  .hero-meta-label {
+    color: var(--text-muted);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .hero-meta-value {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: var(--text);
+    font-size: 11px;
+  }
+}
+
 @media (max-width: 820px) {
   .container {
     width: min(100%, calc(100% - 32px));
@@ -1139,17 +1218,6 @@ a:hover {
 
   .button {
     width: 100%;
-  }
-
-  .hero-visual-tags {
-    position: static;
-    flex-direction: row;
-    flex-wrap: wrap;
-    margin-top: 14px;
-  }
-
-  .floating-tag:nth-child(2) {
-    margin-right: 0;
   }
 
   .timeline {
@@ -1229,6 +1297,14 @@ a:hover {
   .hero-terminal-line {
     gap: 8px;
     font-size: 14px;
+  }
+
+  .hero-visual {
+    width: 100%;
+  }
+
+  .hero-avatar-shell {
+    padding: 8px;
   }
 
   .timeline-card {

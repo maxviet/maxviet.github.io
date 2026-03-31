@@ -20,6 +20,11 @@ export default function Hero() {
   const [charIdx, setCharIdx] = useState(0)
   const [deleting, setDeleting] = useState(false)
   const signals = ['DFIR', 'Hardware Security', 'Local AI Stack']
+  const artworkMeta = [
+    { label: 'Node', value: 'AGENT_MAX' },
+    { label: 'Mode', value: 'LOCAL' },
+    { label: 'Focus', value: 'FORENSICS' },
+  ]
 
   useEffect(() => {
     const current = lines[lineIdx]
@@ -108,20 +113,33 @@ export default function Hero() {
         </div>
 
         <div className="hero-visual">
-          <div className="hero-avatar-shell">
-            <div className="hero-avatar-grid" aria-hidden="true" />
+          <div className="hero-visual-card">
+            <div className="hero-visual-head" aria-hidden="true">
+              <span className="panel-label">field_node</span>
+              <span className="hero-visual-status">
+                <span className="status-dot" aria-hidden="true" />
+                online
+              </span>
+            </div>
 
-            <img
-              src="/avatar.png"
-              alt="Max Viet Uhlmann pixel avatar"
-              className="hero-avatar"
-            />
-          </div>
+            <div className="hero-avatar-shell">
+              <div className="hero-avatar-grid" aria-hidden="true" />
 
-          <div className="hero-visual-tags" aria-hidden="true">
-            <span className="floating-tag">LOCAL_AI</span>
-            <span className="floating-tag">DFIR</span>
-            <span className="floating-tag">HARDWARE</span>
+              <img
+                src="/avatar.png"
+                alt="Max Viet Uhlmann pixel avatar"
+                className="hero-avatar"
+              />
+            </div>
+
+            <div className="hero-visual-meta" aria-hidden="true">
+              {artworkMeta.map(item => (
+                <div key={item.label} className="hero-meta-item">
+                  <span className="hero-meta-label">{item.label}</span>
+                  <span className="hero-meta-value">{item.value}</span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
