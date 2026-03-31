@@ -140,42 +140,18 @@ export default function Hero() {
 
         {/* Avatar */}
         <div style={{
-          border: '1px solid var(--green-dark)',
-          background: 'var(--bg2)',
-          padding: 4,
+          border: '1px solid #1a3020',
+          background: 'transparent',
+          padding: 0,
           boxShadow: '0 0 32px rgba(0,255,136,0.08), inset 0 0 20px rgba(0,0,0,0.4)',
           position: 'relative',
           animation: 'fadeIn 1s ease 0.3s both',
         }}>
-          <div style={{
-            position: 'absolute', top: 8, left: 8,
-            fontFamily: 'var(--pixel)', fontSize: 7,
-            color: 'var(--green-dim)', letterSpacing: 1,
-          }}>
-            AGENT_MAX.exe
-          </div>
-          <div style={{
-            position: 'absolute', top: 8, right: 8,
-            display: 'flex', gap: 4,
-          }}>
-            {['#ff5f57','#ffbd2e','#28c840'].map(c => (
-              <div key={c} style={{ width: 7, height: 7, borderRadius: '50%', background: c }} />
-            ))}
-          </div>
           <img
             src="/avatar.png"
             alt="Max Viet Uhlmann pixel avatar"
-            style={{ width: 220, height: 220, display: 'block', objectFit: 'cover', marginTop: 20, background: '#0d1610' }}
+            style={{ width: 300, height: 'auto', display: 'block' }}
           />
-          <div style={{
-            padding: '8px 12px',
-            fontFamily: 'var(--pixel)', fontSize: 7,
-            color: 'var(--green)', borderTop: '1px solid var(--green-dark)',
-            display: 'flex', alignItems: 'center', gap: 6,
-          }}>
-            <span style={{ animation: 'blink 1.5s step-end infinite', color: 'var(--green)' }}>●</span>
-            ONLINE // READY
-          </div>
         </div>
 
       </div>
