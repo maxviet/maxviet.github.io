@@ -11,7 +11,9 @@ const projects = [
       '7 nicht-registrierte RFID-Tags mit Systemzugriff nachgewiesen',
       'Gelöschte DB-Einträge via Binary Logs rekonstruiert',
     ],
-    color: 'var(--green)',
+    accent: '#00ff88',
+    accentSoft: 'rgba(0,255,136,0.28)',
+    accentBg: 'rgba(0,255,136,0.1)',
     featured: true,
   },
   {
@@ -26,7 +28,9 @@ const projects = [
       'Quellenangabe bei jeder KI-Antwort',
       'Datenschutzkonformer Betrieb ohne externe APIs',
     ],
-    color: '#4affea',
+    accent: '#4affea',
+    accentSoft: 'rgba(74,255,234,0.28)',
+    accentBg: 'rgba(74,255,234,0.1)',
     featured: true,
   },
 ]
@@ -36,58 +40,44 @@ export default function Projects() {
     <section id="projekte">
       <div className="container">
         <h2 className="section-title">PROJEKTE</h2>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 20 }}>
+
+        <div className="projects-grid">
           {projects.map(p => (
-            <div key={p.id} style={{
-              border: `1px solid ${p.color}44`,
-              background: 'var(--bg2)',
-              padding: '24px',
-              position: 'relative',
-              boxShadow: `0 0 20px ${p.color}08`,
-            }}>
+            <article
+              key={p.id}
+              className="panel project-card"
+              style={{
+                '--accent': p.accent,
+                '--accent-soft': p.accentSoft,
+                '--accent-bg': p.accentBg,
+              }}
+            >
               {p.featured && (
-                <div style={{
-                  position: 'absolute', top: -1, right: 20,
-                  fontFamily: 'var(--pixel)', fontSize: 7,
-                  background: p.color, color: 'var(--bg)',
-                  padding: '3px 10px', letterSpacing: 1,
-                }}>
-                  FEATURED
-                </div>
+                <div className="feature-flag">FEATURED</div>
               )}
 
-              <div style={{ fontFamily: 'var(--pixel)', fontSize: 7, color: p.color, marginBottom: 10, opacity: 0.7, letterSpacing: 2 }}>
-                // {p.label}
+              <div className="project-head">
+                <div className="panel-label project-label">// {p.label}</div>
               </div>
 
-              <div style={{ fontFamily: 'var(--pixel)', fontSize: 9, color: p.color, marginBottom: 14, lineHeight: 1.6 }}>
+              <h3 className="project-title">
                 {p.title}
-              </div>
+              </h3>
 
-              <p style={{ fontFamily: 'var(--mono)', fontSize: 12, color: 'var(--text-dim)', lineHeight: 1.8, marginBottom: 16 }}>
-                {p.desc}
-              </p>
+              <p className="body-copy project-desc">{p.desc}</p>
 
-              <div style={{ marginBottom: 16 }}>
+              <ul className="project-findings">
                 {p.findings.map(f => (
-                  <div key={f} style={{ display: 'flex', gap: 8, marginBottom: 5, fontFamily: 'var(--mono)', fontSize: 11, color: 'var(--text-dim)' }}>
-                    <span style={{ color: p.color, flexShrink: 0 }}>▸</span>
-                    <span>{f}</span>
-                  </div>
+                  <li key={f}>{f}</li>
                 ))}
-              </div>
+              </ul>
 
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+              <div className="tag-row">
                 {p.tags.map(t => (
-                  <span key={t} style={{
-                    fontFamily: 'var(--mono)', fontSize: 10,
-                    border: `1px solid ${p.color}22`,
-                    color: p.color, padding: '2px 8px',
-                    background: `${p.color}08`,
-                  }}>{t}</span>
+                  <span key={t} className="accent-tag">{t}</span>
                 ))}
               </div>
-            </div>
+            </article>
           ))}
         </div>
       </div>

@@ -5,7 +5,9 @@ const events = [
     sub: 'Lokale KI-Infrastruktur',
     desc: 'Aufbau eines lokalen RAG-Systems mit Vektordatenbank und quellenbasierter Ausgabe. Ziel: datenschutzkonforme KI für interne Dokumente ohne Cloud-Anbindung.',
     tags: ['Ollama', 'RAG', 'VektorDB', 'Python', 'LangChain'],
-    color: '#4affea',
+    accent: '#4affea',
+    accentSoft: 'rgba(74,255,234,0.28)',
+    accentBg: 'rgba(74,255,234,0.1)',
     active: true,
   },
   {
@@ -14,7 +16,9 @@ const events = [
     sub: 'Miaglossa GmbH',
     desc: 'Systemadministration & IT-Support. Laptop-Provisioning, Onboarding, Software-Rollouts, Fehleranalyse & Event-Management für Großkunden.',
     tags: ['Sysadmin', 'IT-Support', 'Event-Management'],
-    color: 'var(--green)',
+    accent: '#00ff88',
+    accentSoft: 'rgba(0,255,136,0.28)',
+    accentBg: 'rgba(0,255,136,0.1)',
   },
   {
     date: 'seit 2023',
@@ -22,7 +26,9 @@ const events = [
     sub: 'Hochschule Niederrhein · vorauss. 2026/27',
     desc: 'Fokus auf DFIR, Hardware-Security, Netzwerkforensik und Incident Response. Ø 2,29 · Forensikprojekt: 2,0.',
     tags: ['DFIR', 'Kriminalistik', 'Netzwerkforensik', 'Security'],
-    color: '#c39bff',
+    accent: '#c39bff',
+    accentSoft: 'rgba(195,155,255,0.28)',
+    accentBg: 'rgba(195,155,255,0.1)',
   },
   {
     date: '08.2023 — 03.2025',
@@ -30,7 +36,9 @@ const events = [
     sub: 'CloudCommand GmbH',
     desc: 'Betreuung von 30+ Teilnehmenden in Cybersecurity-Kursen. Aufbau einer dauerhaften Cyber Range, AD-Labs, CTF-Szenarien. Vermittlung von PenTest, SIEM, IDS/IPS.',
     tags: ['Cyber Range', 'AD-Labs', 'CTF', 'SIEM', 'Lehre'],
-    color: '#ffb347',
+    accent: '#ffb347',
+    accentSoft: 'rgba(255,179,71,0.28)',
+    accentBg: 'rgba(255,179,71,0.1)',
   },
   {
     date: '06.2022 — 09.2022',
@@ -38,7 +46,9 @@ const events = [
     sub: 'Verapartner Leadership',
     desc: 'End-to-End Content-Ops: Fotografie, Videodreh, Schnitt, Kampagnenplanung & Performance-Analyse (KPIs).',
     tags: ['Content', 'KPI-Analyse', 'Video'],
-    color: 'var(--text-dim)',
+    accent: '#8ab89a',
+    accentSoft: 'rgba(138,184,154,0.22)',
+    accentBg: 'rgba(138,184,154,0.08)',
   },
 ]
 
@@ -47,62 +57,43 @@ export default function Timeline() {
     <section id="timeline">
       <div className="container">
         <h2 className="section-title">TIMELINE</h2>
-        <div style={{ position: 'relative', paddingLeft: 24 }}>
-          {/* vertical line */}
-          <div style={{
-            position: 'absolute', left: 0, top: 0, bottom: 0,
-            width: 1, background: 'var(--border)',
-          }} />
 
+        <div className="timeline">
           {events.map((ev, i) => (
-            <div key={i} style={{ position: 'relative', marginBottom: 36 }}>
-              {/* dot */}
-              <div style={{
-                position: 'absolute', left: -28, top: 6,
-                width: 8, height: 8,
-                background: ev.active ? ev.color : 'var(--bg)',
-                border: `1px solid ${ev.color}`,
-                boxShadow: ev.active ? `0 0 8px ${ev.color}` : 'none',
-              }} />
+            <article
+              key={i}
+              className={`timeline-item ${ev.active ? 'is-active' : ''}`}
+              style={{
+                '--accent': ev.accent,
+                '--accent-soft': ev.accentSoft,
+                '--accent-bg': ev.accentBg,
+              }}
+            >
+              <div className="timeline-dot" />
 
-              <div style={{
-                border: '1px solid var(--border)',
-                background: ev.active ? 'var(--bg2)' : 'var(--bg)',
-                padding: '18px 22px',
-                borderLeft: `2px solid ${ev.color}33`,
-              }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 8, marginBottom: 6 }}>
+              <div className="panel timeline-card">
+                <div className="timeline-header">
                   <div>
-                    <div style={{
-                      fontFamily: 'var(--pixel)', fontSize: 8,
-                      color: ev.color, marginBottom: 4, letterSpacing: 1,
-                    }}>
-                      {ev.title}
-                      {ev.active && <span style={{
-                        marginLeft: 10, fontSize: 7, background: ev.color,
-                        color: 'var(--bg)', padding: '2px 6px', letterSpacing: 0,
-                      }}>ACTIVE</span>}
+                    <div className="timeline-title-row">
+                      <h3 className="timeline-title">{ev.title}</h3>
+                      {ev.active && <span className="timeline-active">ACTIVE</span>}
                     </div>
-                    <div style={{ fontFamily: 'var(--mono)', fontSize: 11, color: 'var(--text-dim)' }}>{ev.sub}</div>
+
+                    <div className="timeline-sub">{ev.sub}</div>
                   </div>
-                  <div style={{ fontFamily: 'var(--mono)', fontSize: 10, color: 'var(--text-dim)', opacity: 0.6 }}>{ev.date}</div>
+
+                  <div className="timeline-date">{ev.date}</div>
                 </div>
 
-                <p style={{ fontFamily: 'var(--mono)', fontSize: 12, color: 'var(--text-dim)', lineHeight: 1.7, marginBottom: 12 }}>{ev.desc}</p>
+                <p className="body-copy timeline-desc">{ev.desc}</p>
 
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+                <div className="tag-row">
                   {ev.tags.map(t => (
-                    <span key={t} style={{
-                      fontFamily: 'var(--mono)', fontSize: 10,
-                      border: `1px solid ${ev.color}22`,
-                      color: ev.color, padding: '2px 8px',
-                      background: `${ev.color}08`,
-                      opacity: 0.9,
-                    }}>{t}</span>
+                    <span key={t} className="accent-tag">{t}</span>
                   ))}
                 </div>
               </div>
-            </div>
+            </article>
           ))}
         </div>
       </div>

@@ -1,32 +1,44 @@
 const skillGroups = [
   {
     label: 'DFIR / Forensik',
-    color: 'var(--green)',
+    accent: '#00ff88',
+    accentSoft: 'rgba(0,255,136,0.28)',
+    accentBg: 'rgba(0,255,136,0.1)',
     skills: ['dd / Imaging', 'Autopsy', 'Sleuth Kit', 'Timeline-Analyse', 'Mail-Forensik', 'Artefakt-Analyse'],
   },
   {
     label: 'Netzwerk / Sec',
-    color: '#5aafff',
+    accent: '#5aafff',
+    accentSoft: 'rgba(90,175,255,0.28)',
+    accentBg: 'rgba(90,175,255,0.1)',
     skills: ['Wireshark', 'PCAP-Analyse', 'IDS/IPS-Konzepte', 'Tor / .onion', 'LUKS-Container'],
   },
   {
     label: 'Systeme / Admin',
-    color: '#ffb347',
+    accent: '#ffb347',
+    accentSoft: 'rgba(255,179,71,0.28)',
+    accentBg: 'rgba(255,179,71,0.1)',
     skills: ['Linux (Shell)', 'Active Directory', 'Laptop-Provisioning', 'Services & Packages', 'esptool / UART'],
   },
   {
     label: 'Programmierung',
-    color: '#c39bff',
+    accent: '#c39bff',
+    accentSoft: 'rgba(195,155,255,0.28)',
+    accentBg: 'rgba(195,155,255,0.1)',
     skills: ['Python', 'SQL', 'Scripting & Automation', 'HTML / CSS', 'Tailwind'],
   },
   {
     label: 'Labs / CTF',
-    color: '#ff8fab',
+    accent: '#ff8fab',
+    accentSoft: 'rgba(255,143,171,0.28)',
+    accentBg: 'rgba(255,143,171,0.1)',
     skills: ['TryHackMe', 'HackTheBox', 'AD-Labs', 'Cyber Range', 'CTF-Szenarien'],
   },
   {
     label: 'KI / RAG',
-    color: '#4affea',
+    accent: '#4affea',
+    accentSoft: 'rgba(74,255,234,0.28)',
+    accentBg: 'rgba(74,255,234,0.1)',
     skills: ['Lokale LLMs', 'RAG-Architektur', 'VektorDB', 'Ollama', 'LangChain'],
   },
 ]
@@ -36,34 +48,26 @@ export default function Skills() {
     <section id="skills">
       <div className="container">
         <h2 className="section-title">SKILL_SET</h2>
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
-          gap: 16,
-        }}>
+
+        <div className="skills-grid">
           {skillGroups.map(group => (
-            <div key={group.label} style={{
-              border: '1px solid var(--border)',
-              background: 'var(--bg2)',
-              padding: '20px 22px',
-            }}>
-              <div style={{
-                fontFamily: 'var(--pixel)', fontSize: 8,
-                color: group.color, marginBottom: 16, letterSpacing: 1,
-              }}>
-                {group.label}
+            <div
+              key={group.label}
+              className="panel skill-card"
+              style={{
+                '--accent': group.accent,
+                '--accent-soft': group.accentSoft,
+                '--accent-bg': group.accentBg,
+              }}
+            >
+              <div className="skill-card-head">
+                <div className="skill-card-title">{group.label}</div>
+                <div className="skill-count">{group.skills.length}</div>
               </div>
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+
+              <div className="skill-cloud">
                 {group.skills.map(s => (
-                  <span key={s} style={{
-                    fontFamily: 'var(--mono)', fontSize: 11,
-                    border: `1px solid ${group.color}22`,
-                    color: 'var(--text-dim)',
-                    padding: '3px 9px',
-                    background: `${group.color}08`,
-                  }}>
-                    {s}
-                  </span>
+                  <span key={s} className="skill-pill">{s}</span>
                 ))}
               </div>
             </div>

@@ -8,14 +8,16 @@ import Contact from './components/Contact'
 
 export default function App() {
   return (
-    <>
+    <div className="site-shell">
       <Nav />
-      <Hero />
-      <About />
-      <Timeline />
-      <Projects />
-      <Skills />
-      <Contact />
-    </>
+      <main>
+        <Hero />
+        <About />
+        <Timeline />
+        <Projects />
+        <Skills />
+        <Contact />
+      </main>
+    </div>
   )
 }

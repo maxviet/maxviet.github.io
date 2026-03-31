@@ -9,9 +9,9 @@ const lines = [
 ]
 
 const badges = [
-  { label: 'Status:', value: 'Available', valueColor: 'var(--green)' },
-  { label: 'Location:', value: 'DE', valueColor: 'var(--text)' },
-  { label: 'Focus:', value: 'Forensics + AI', valueColor: 'var(--green-dim)' },
+  { label: 'Status', value: 'Available', valueColor: 'var(--green)' },
+  { label: 'Location', value: 'DE', valueColor: 'var(--text)' },
+  { label: 'Focus', value: 'Forensics + AI', valueColor: 'var(--green-dim)' },
 ]
 
 export default function Hero() {
@@ -19,6 +19,7 @@ export default function Hero() {
   const [lineIdx, setLineIdx] = useState(0)
   const [charIdx, setCharIdx] = useState(0)
   const [deleting, setDeleting] = useState(false)
+  const signals = ['DFIR', 'Hardware Security', 'Local AI Stack']
 
   useEffect(() => {
     const current = lines[lineIdx]
@@ -44,116 +45,85 @@ export default function Hero() {
   }, [charIdx, deleting, lineIdx])
 
   return (
-    <section id="hero" style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', paddingTop: 56 }}>
-      <div className="container" style={{ display: 'grid', gridTemplateColumns: '1fr auto', gap: 48, alignItems: 'center' }}>
-        
-        <div style={{ animation: 'fadeIn 0.8s ease forwards' }}>
-          {/* Badges */}
-          <div style={{ display: 'flex', gap: 10, marginBottom: 28, flexWrap: 'wrap' }}>
+    <section id="hero" className="hero">
+      <div className="container hero-layout">
+        <div className="hero-copy">
+          <div className="hero-badges">
             {badges.map(b => (
-              <span key={b.label} style={{
-                fontFamily: 'var(--mono)', fontSize: 11,
-                border: '1px solid var(--border)',
-                padding: '5px 12px',
-                display: 'flex', gap: 6,
-                background: 'var(--bg2)',
-              }}>
-                <span style={{ color: 'var(--text-dim)' }}>{b.label}</span>
+              <span key={b.label} className="status-chip">
+                <span className="status-chip-label">{b.label}</span>
                 <span style={{ color: b.valueColor }}>{b.value}</span>
               </span>
             ))}
           </div>
 
-          {/* Name */}
-          <h1 style={{
-            fontFamily: 'var(--pixel)',
-            fontSize: 'clamp(22px, 4vw, 38px)',
-            color: 'var(--green)',
-            lineHeight: 1.4,
-            marginBottom: 20,
-            letterSpacing: 2,
-          }}>
+          <div className="hero-kicker">Digital Forensics // Local AI Infrastructure</div>
+
+          <h1 className="hero-title">
             Max Viet<br />Uhlmann
           </h1>
 
-          {/* Typewriter */}
-          <div style={{
-            fontFamily: 'var(--mono)', fontSize: 13,
-            color: 'var(--text-dim)', marginBottom: 24, minHeight: 22,
-            display: 'flex', alignItems: 'center', gap: 4,
-          }}>
-            <span style={{ color: 'var(--green-dim)' }}>$ </span>
-            <span>{displayed}</span>
-            <span style={{ animation: 'blink 1s step-end infinite', color: 'var(--green)' }}>█</span>
+          <div className="panel hero-terminal">
+            <div className="hero-terminal-head">
+              <span className="panel-label">live_session</span>
+              <span className="hero-terminal-status">
+                <span className="status-dot" aria-hidden="true" />
+                typing
+              </span>
+            </div>
+
+            <div className="hero-terminal-line">
+              <span className="terminal-prompt">$</span>
+              <span className="terminal-content" aria-live="polite" aria-atomic="true">
+                {displayed || '\u00a0'}
+              </span>
+              <span className="terminal-cursor" aria-hidden="true">█</span>
+            </div>
           </div>
 
-          {/* Description */}
-          <p style={{
-            maxWidth: 520, color: 'var(--text-dim)',
-            fontFamily: 'var(--mono)', fontSize: 13,
-            lineHeight: 1.8, marginBottom: 36,
-          }}>
+          <p className="body-copy hero-description">
             IT-Forensiker mit Fokus auf digitale Spurensicherung, Hardware-Security und KI-gestützte Systeme. 
             Aktuell im Praktikum bei einer Polizeibehörde — Aufbau einer lokalen RAG-KI-Infrastruktur.
           </p>
 
-          {/* Buttons */}
-          <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-            <a href="#projekte" style={{
-              fontFamily: 'var(--pixel)', fontSize: 9,
-              background: 'var(--green)', color: 'var(--bg)',
-              padding: '12px 20px', textDecoration: 'none',
-              letterSpacing: 1, transition: 'opacity 0.2s',
-              display: 'inline-block',
-            }}
-            onMouseEnter={e => e.currentTarget.style.opacity = '0.85'}
-            onMouseLeave={e => e.currentTarget.style.opacity = '1'}
-            >
+          <div className="hero-actions">
+            <a href="#projekte" className="button button-primary">
               Projekte ansehen
             </a>
-            <a href="#kontakt" style={{
-              fontFamily: 'var(--pixel)', fontSize: 9,
-              border: '1px solid var(--green)', color: 'var(--green)',
-              padding: '12px 20px', textDecoration: 'none',
-              letterSpacing: 1, transition: 'background 0.2s',
-              display: 'inline-block',
-            }}
-            onMouseEnter={e => { e.currentTarget.style.background = 'var(--green-faint)' }}
-            onMouseLeave={e => { e.currentTarget.style.background = 'transparent' }}
-            >
-              Kontakt
-            </a>
-            <a href="/Lebenslauf_MaxUhlmann.pdf" download style={{
-              fontFamily: 'var(--pixel)', fontSize: 9,
-              border: '1px solid var(--border)', color: 'var(--text-dim)',
-              padding: '12px 20px', textDecoration: 'none',
-              letterSpacing: 1, transition: 'border-color 0.2s, color 0.2s',
-              display: 'inline-block',
-            }}
-            onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--green-dim)'; e.currentTarget.style.color = 'var(--green-dim)' }}
-            onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.color = 'var(--text-dim)' }}
-            >
+
+            <a href="/Lebenslauf_MaxUhlmann.pdf" download className="button button-secondary">
               CV herunterladen
             </a>
+
+            <a href="#kontakt" className="button button-ghost">
+              Kontakt
+            </a>
+          </div>
+
+          <div className="hero-signal-row">
+            {signals.map(signal => (
+              <span key={signal} className="signal-chip">{signal}</span>
+            ))}
           </div>
         </div>
 
-        {/* Avatar */}
-        <div style={{
-          border: '1px solid #1a3020',
-          background: 'transparent',
-          padding: 0,
-          boxShadow: '0 0 32px rgba(0,255,136,0.08), inset 0 0 20px rgba(0,0,0,0.4)',
-          position: 'relative',
-          animation: 'fadeIn 1s ease 0.3s both',
-        }}>
-          <img
-            src="/avatar.png"
-            alt="Max Viet Uhlmann pixel avatar"
-            style={{ width: 300, height: 'auto', display: 'block' }}
-          />
-        </div>
+        <div className="hero-visual">
+          <div className="hero-avatar-shell">
+            <div className="hero-avatar-grid" aria-hidden="true" />
 
+            <img
+              src="/avatar.png"
+              alt="Max Viet Uhlmann pixel avatar"
+              className="hero-avatar"
+            />
+          </div>
+
+          <div className="hero-visual-tags" aria-hidden="true">
+            <span className="floating-tag">LOCAL_AI</span>
+            <span className="floating-tag">DFIR</span>
+            <span className="floating-tag">HARDWARE</span>
+          </div>
+        </div>
       </div>
     </section>
   )
