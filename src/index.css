@@ -259,6 +259,11 @@ a:hover {
   box-shadow: 0 0 26px rgba(0, 255, 136, 0.18);
 }
 
+.button-primary:hover {
+  box-shadow: 0 0 42px rgba(0, 255, 136, 0.38), 0 6px 22px rgba(0, 0, 0, 0.22);
+  border-color: rgba(121, 255, 195, 0.9);
+}
+
 .button-secondary {
   color: var(--text);
   background: rgba(0, 255, 136, 0.08);
@@ -292,12 +297,14 @@ a:hover {
   font-size: 11px;
   letter-spacing: 0.14em;
   color: var(--green);
-  text-shadow: 0 0 16px rgba(0, 255, 136, 0.14);
+  text-shadow: 0 0 20px rgba(0, 255, 136, 0.22), 0 0 40px rgba(0, 255, 136, 0.08);
 }
 
 .section-title::before {
   content: '>_';
-  color: var(--green-dim);
+  color: var(--green);
+  text-shadow: 0 0 14px rgba(0, 255, 136, 0.5);
+  opacity: 0.82;
 }
 
 .section-title::after {
@@ -364,6 +371,12 @@ a:hover {
   letter-spacing: 0.18em;
   color: var(--green);
   text-shadow: 0 0 12px rgba(0, 255, 136, 0.18);
+  transition: text-shadow 0.2s ease, color 0.2s ease;
+}
+
+.nav-brand:hover {
+  color: var(--green-soft);
+  text-shadow: 0 0 24px rgba(0, 255, 136, 0.5), 0 0 8px rgba(0, 255, 136, 0.3);
 }
 
 .nav-desktop {
@@ -399,7 +412,9 @@ a:hover {
 }
 
 .nav-link.is-active {
+  color: var(--green-soft);
   box-shadow: inset 0 -2px 0 var(--green-dim);
+  text-shadow: 0 0 12px rgba(0, 255, 136, 0.25);
 }
 
 .nav-status {
@@ -459,11 +474,17 @@ a:hover {
 }
 
 .nav-mobile {
-  display: none;
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition:
+    max-height 0.32s var(--ease-premium),
+    opacity 0.24s ease;
 }
 
 .nav-mobile.is-open {
-  display: block;
+  max-height: 520px;
+  opacity: 1;
 }
 
 .nav-mobile-links {
@@ -548,6 +569,11 @@ a:hover {
   letter-spacing: 0.08em;
   color: var(--green);
   text-shadow: 0 0 22px rgba(0, 255, 136, 0.16);
+  animation: hero-glitch-ambient 14s steps(1) infinite;
+}
+
+.hero-title:hover {
+  animation: hero-glitch-hover 0.4s steps(2) 1, hero-glitch-ambient 14s steps(1) infinite;
 }
 
 .hero-terminal {
@@ -730,11 +756,16 @@ a:hover {
 .about-copy:hover,
 .stats-panel:hover,
 .contact-copy-panel:hover,
-.contact-list-panel:hover,
-.skill-card:hover {
+.contact-list-panel:hover {
   transform: translateY(-3px);
   border-color: var(--border-strong);
   box-shadow: var(--shadow-soft), var(--shadow-green);
+}
+
+.skill-card:hover {
+  transform: translateY(-3px);
+  border-top-color: var(--accent);
+  box-shadow: var(--shadow-soft), 0 0 32px var(--accent-soft);
 }
 
 .about-copy,
@@ -852,7 +883,7 @@ a:hover {
 
 .timeline-item:hover .timeline-card {
   transform: translateX(4px);
-  box-shadow: var(--shadow-soft), 0 0 26px var(--accent-bg);
+  box-shadow: var(--shadow-soft), 0 0 36px var(--accent-soft);
 }
 
 .timeline-header {
@@ -926,7 +957,27 @@ a:hover {
 
 .project-card:hover {
   transform: translateY(-4px);
-  box-shadow: var(--shadow-soft), 0 0 30px var(--accent-bg);
+  border-top-color: var(--accent);
+  box-shadow: var(--shadow-soft), 0 0 44px var(--accent-soft);
+}
+
+.project-card::after {
+  content: '';
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  width: 14px;
+  height: 14px;
+  border-bottom: 1px solid var(--accent-soft);
+  border-right: 1px solid var(--accent-soft);
+  pointer-events: none;
+  transition: opacity 0.3s ease, border-color 0.3s ease;
+  opacity: 0.5;
+}
+
+.project-card:hover::after {
+  border-color: var(--accent);
+  opacity: 1;
 }
 
 .project-head {
@@ -1043,6 +1094,18 @@ a:hover {
   background: rgba(255, 255, 255, 0.02);
   color: var(--text-dim);
   font-size: 12px;
+  transition:
+    border-color 0.2s ease,
+    color 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.skill-pill:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-bg);
+  box-shadow: 0 0 10px var(--accent-soft);
 }
 
 .contact-copy {
@@ -1184,6 +1247,72 @@ a:hover {
   50% {
     transform: scale(0.82);
     opacity: 0.72;
+  }
+}
+
+@keyframes hero-glitch-ambient {
+  0%,
+  89%,
+  100% {
+    text-shadow: 0 0 22px rgba(0, 255, 136, 0.16);
+    transform: none;
+  }
+
+  90% {
+    text-shadow:
+      -3px 0 rgba(255, 0, 100, 0.45),
+      3px 0 rgba(0, 255, 200, 0.45),
+      0 0 22px rgba(0, 255, 136, 0.2);
+    transform: translateX(-2px) skewX(-1.5deg);
+  }
+
+  91% {
+    text-shadow:
+      3px 0 rgba(255, 0, 100, 0.5),
+      -3px 0 rgba(74, 255, 234, 0.5);
+    transform: translateX(3px);
+  }
+
+  92% {
+    text-shadow:
+      -1px 0 rgba(74, 255, 234, 0.3),
+      1px 0 rgba(0, 255, 136, 0.3);
+    transform: translateX(-1px) skewX(0.5deg);
+  }
+
+  93% {
+    text-shadow: 0 0 28px rgba(0, 255, 136, 0.24);
+    transform: none;
+  }
+}
+
+@keyframes hero-glitch-hover {
+  0%,
+  100% {
+    text-shadow: 0 0 22px rgba(0, 255, 136, 0.16);
+    transform: none;
+  }
+
+  20% {
+    text-shadow:
+      -4px 0 rgba(255, 0, 100, 0.6),
+      4px 0 rgba(0, 255, 200, 0.6),
+      0 0 22px rgba(0, 255, 136, 0.2);
+    transform: skewX(-2deg) translateX(-3px);
+  }
+
+  50% {
+    text-shadow:
+      4px 0 rgba(255, 0, 100, 0.5),
+      -4px 0 rgba(74, 255, 234, 0.5);
+    transform: translateX(4px) skewX(1.5deg);
+  }
+
+  75% {
+    text-shadow:
+      -2px 0 rgba(74, 255, 234, 0.35),
+      2px 0 rgba(0, 255, 136, 0.35);
+    transform: translateX(-2px);
   }
 }
 

@@ -56,17 +56,19 @@ export default function Timeline() {
   return (
     <section id="timeline">
       <div className="container">
-        <h2 className="section-title">TIMELINE</h2>
+        <h2 className="section-title" data-reveal>TIMELINE</h2>
 
         <div className="timeline">
           {events.map((ev, i) => (
             <article
               key={i}
               className={`timeline-item ${ev.active ? 'is-active' : ''}`}
+              data-reveal
               style={{
                 '--accent': ev.accent,
                 '--accent-soft': ev.accentSoft,
                 '--accent-bg': ev.accentBg,
+                '--reveal-delay': `${60 + i * 80}ms`,
               }}
             >
               <div className="timeline-dot" />
